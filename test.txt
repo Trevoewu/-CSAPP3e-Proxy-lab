@@ -1,0 +1,61 @@
+下一步、步入、步出、继续执行
+# 下一步 (next 或 n)
+(lldb) next
+
+# 步入(step 或 s)
+(lldb) step
+  
+# 步出(finish)
+(lldb) finish
+
+# 继续执行到下一个断点停, 后面没有断点的话就跑完了（continue 或 c）
+(lldb) continue
+​
+查看变量、跳帧查看变量
+# 使用po或p，po一般用来输出指针指向的那个对象，p一般用来输出基础变量。普通数组两者都可用
+(lldb) po result_array
+ 
+ # 查看所有帧(bt)
+(lldb) bt
+   
+# 跳帧（frame select）
+(lldb) frame select 1
+  
+# 查看当前帧中所有变量的值（frame variable）
+ (lldb) frame variable
+​
+修改变量或调用函数
+使用 expression 命令可以在调试过程中修改变量的值，或者执行函数。
+
+修改变量值
+(lldb) expression a
+(int) $0 = 9
+(lldb) frame variable a
+(int) a = 9
+(lldb) expression a=10
+(int) $1 = 10
+(lldb) frame variable a
+(int) a = 10
+(lldb) 
+​
+调用函数
+(lldb) expression printf("execute function %i",a)
+(int) $2 = 19
+execute function 10
+​
+对于执行结果都会自动保存，以备他用。
+
+线程控制
+在加载进程开始调试后，当执行到设置断点时，可以使用 thread 命令控制代码的执行。
+
+线程继续执行
+
+(lldb) thread continue 
+Resuming thread 0x2c03 in process 46915 
+Resuming process 46915 
+(lldb)
+
+作者：Hanseltu
+链接：https://ld246.com/article/1556200452086
+来源：链滴
+协议：CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
